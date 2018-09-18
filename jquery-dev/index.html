@@ -5,17 +5,37 @@
   <title>Tree Menu</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/tree-menu.js"></script>
+  <script src="js/hierarchical-menu.js"></script>
 </head>
 <body>
-<!--
-1. Править код в текущем состоянии (структура)
-2. Конфигурируемая ширина/ высота пункта меню)
-3. Анимированное поведение
-4. Стилизация меню (пока статически)
-5. Чтение структуры из json
-6. Настраиваемая анимация
-7. Настраиваемая стилизация
--->
+ <script>
+   $(document).ready(() => {
+     const menu = new TreeMenu();
+     menu.createItem('Item 1');
+
+     const item2 = menu.createItem('Item 2');
+     item2.createItem('Item 2.1');
+     item2.createItem('Item 2.2');
+
+     const item23 = item2.createItem('Item 2.3');
+     item23.createItem('Item 2.3.1');
+     item23.createItem('Item 2.3.2');
+
+     const item233 = item23.createItem('Item 2.3.3');
+     item233.createItem('Item 2.3.3.1');
+     item233.createItem('Item 2.3.3.2');
+
+     item2.createItem('Item 2.4');
+
+     menu.createItem('Item 3');
+
+     menu.render('.custom-menu');
+   });
+ </script>
+  <div class='custom-menu'>
+  </div>
+  <!--<div>
+    <h1>Реализация иерархического меню</h1>
+  </div>-->
 </body>
 </html>
