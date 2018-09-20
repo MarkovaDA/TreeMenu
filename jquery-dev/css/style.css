@@ -14,6 +14,12 @@
 	font-family: Arial, Verdana;
 	line-height: 50px;
 	text-align: center;
-	/*border: 1px solid deeppink;*/
 	cursor:pointer;
+}
+
+.tree-menu .items-group {
+	position: absolute;
+	border: 1px solid black !important;
+	width: 120px;
+	height: 50px;
 }
