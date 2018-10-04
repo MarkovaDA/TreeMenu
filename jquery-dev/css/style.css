@@ -17,9 +17,11 @@
 	cursor:pointer;
 }
 
-.tree-menu .items-group {
-	position: absolute;
-	border: 1px solid black !important;
-	width: 120px;
-	height: 50px;
+.item-group {
+    width: 100%;
+    height: 50px;
+	border:1px solid blue;
+    position: absolute;
+    top: 0;
+    left: 0; /*children[0].left; height: children.count * height*/
 }

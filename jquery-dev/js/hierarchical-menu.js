@@ -24,6 +24,11 @@ class MenuNode {
 
     return item;
   }
+
+  wrap() {
+    this.node.children().wrapAll('<div class="item-group"></div>');
+    this.children.forEach(child => child.wrap())
+  }
 }
 
 class RootItem extends MenuNode {
@@ -53,7 +58,7 @@ class MenuItem extends MenuNode {
       this.left = length * width;
       this.top = 0;
     } else if (this.parent instanceof MenuItem) {
-      this.display = 'none'; //видны только элементы первого уровня
+      //this.display = 'none'; //видны только элементы первого уровня
       //второй уровень вложенности меню
       if (this.parent.parent instanceof RootItem) {
         this.left = 0;
@@ -66,29 +71,11 @@ class MenuItem extends MenuNode {
 
     this.node = this.initDOM();
 
-    this.node.mouseenter((event) => {
+    /*this.node.mouseenter((event) => {
       event.stopPropagation();
 
-      //закрыть все открытые до этого узлы
       this.node.children().fadeIn();
-    });
-
-    this.node.mouseleave((event) => {
-      event.stopPropagation();
-
-      const { relatedTarget } = event;
-
-      const prevUid = this.id;
-      const nextUid = $(relatedTarget).attr('uid');
-
-      //console.log(prevUid, nextUid);
-
-      if (nextUid && nextUid.startsWith(prevUid)) {
-        return;
-      } else if (nextUid) {
-        this.node.children().fadeOut();
-      }
-    });
+    });*/
   }
 
   initDOM() {
@@ -106,16 +93,15 @@ class TreeMenu {
 
   render(container = document.body) {
     this.menu.getDOM().appendTo(container);
+    this.wrapItems();
   }
 
   createItem(title) {
    return this.menu.createItem(title);
   }
 
-  close() {
-    this.menu.children.forEach((child) => {
-      child.node.children().fadeOut()
-    });
+  wrapItems() {
+    this.menu.wrap();
   }
 }
 
